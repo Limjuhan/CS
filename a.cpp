@@ -588,6 +588,199 @@ ld:long long
 //	
 //} 
 
+//=============================================================================================
+
+
+//fill(), memset()
+//배열초기화시 사용.
+//fill(): 0,1,100등 모든 값으로 초기화 가능.[first,last)까지 val로 초기화
+//memset(): -1,0으로만 초기화 가능  
+//[은 포함하다라는 수학적기호, )은 포함하지 않는다는 기호입니다. 즉, 시작값은 포함하고, 
+//끝값은 포함하지 않고 초기화한다는 의미입니다.
+
+
+//#include<bits/stdc++.h> 
+//using namespace std;
+//int a[10];
+//int b[10][10];//[횡][종] 
+//int main() {
+//	fill(&a[0], &a[10], 100);//a[10]으로 지정해야 a[9]까지 초기화한다. 
+//	
+//	for(int i=0; i<10; i++) {
+//		cout << a[i] << " ";
+//	}
+//	cout << '\n';
+//	fill(&b[0][0], &b[9][10], 2);
+//	for(int i=0; i<10; i++) {
+//		for(int j=0; j<10; j++) {
+//			cout << b[i][j] << " ";
+//		}
+//		cout << '\n';
+//	}
+//	return 0;
+//}
+
+//배열이름으로도 초기화 가능 
+//1차원의 경우 a, a + 10, 즉, 배열의 이름 + 숫자로 가능하지만 2차원 이상일 경우에는
+//반드시 &b[0][0] + 숫자로 해야 한다는 것을 기억해주세요.
+
+//#include <bits/stdc++.h>
+//using namespace std;
+//int a[10];
+//int b[10][10];
+//int main() {
+//	fill(a, a+10, 100);
+//	
+//	for (int i=0; i<10; i++) {
+//		cout << a[i] << " ";
+//	}
+//	cout << '\n';
+//	fill(&b[0][0], &b[0][0]+10*10, 2);
+//	for(int i=0; i<10; i++) {
+//		for(int j=0; j<10; j++) {
+//			cout <<b[i][j] << " ";
+//		}
+//		cout << '\n';
+//	}
+//	return 0;
+//} 
+//
+
+//fill()로 전체초기화를 해야하는 이유
+//#include<bits/stdc++.h>
+//using namespace std;
+//int a[10][10];
+//int main() {
+//	cin.tie(NULL); cout.tie(NULL);//입,출력 속도를 높이기위해쓴다. 단순히 최적화하는 구문X.구글통해 검색및 정리 
+//	fill(&a[0][0], &a[0][0]+8*8, 4);
+//	for(int i=0; i<10; i++) {
+//		for(int j=0; j<10; j++) {
+//			cout << a[i][j] << " ";
+//		}
+//		cout << '\n';
+//	}
+//	return 0;
+//} 
+/*
+4 4 4 4 4 4 4 4 4 4
+4 4 4 4 4 4 4 4 4 4
+4 4 4 4 4 4 4 4 4 4
+4 4 4 4 4 4 4 4 4 4
+4 4 4 4 4 4 4 4 4 4
+4 4 4 4 4 4 4 4 4 4
+4 4 4 4 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+*/
+//초기화시  위와같이 결과가나옴. 전체초기화를 하는게 좋다. 
+
+//memset() 
+//void * memset(void *ptr, int value, size_t num);
+
+
+
+//=============================================================================================
+
+//쓰지 말아야할 초기화 방법
+//#include <bits/stdc++.h>
+//using namespace std;
+//int main() {
+//	int cnt = 0;
+//	int a[5] = {0, };
+//	while(++cnt !=10) {
+//		for(int i=0; i<5; i++) {
+//		a[i]=i;//a[0]=0,a[1]=1...a[4]=4
+//		cout << a[i] << '\n';
+//		}
+//		a[5]={0, };
+//		for(int i : a) cout << i << ' ';//0 1 2 3 4 출력됨. 초기화 안되는것 확인. 
+//		
+//	}
+//	return 0;
+//}
+
+//=================================================================================================
+//memcpy(), copy() ->어떤 변수를 깊은 복사할때 사용.
+//memcpy(): Array끼리 복사할때 사용.memcpy()는 vector에서는 깊은복사 안됨. void * memcpy(void * destination, const void *resuource, size_t num);
+//copy(): Array, vector에 모두 쓰임 
+
+// [참고] 얕은 복사와 깊은 복사
+//참고로 얕은 복사(Shallow copy)는 메모리 주소값을 복사한 것이라 복사한 배열을 수정하면 원본 배열이
+//수정되는 복사방법이며 깊은 복사(Deep copy)는 새로운 메모리 공간을 확보해 완전히 복사해 복사한 배열을
+//수정하면 원본 배열은 수정되는 않는 복사방법을 의미합니다.
+
+//#include <bits/stdc++.h>
+//using namespace std;
+//int main(void) {
+//	int v[3] = {1,2,3};
+//	int ret[3];
+//	memcpy(ret, v, sizeof(v));
+//	cout << ret[1] << "\n";
+//	ret[1]=100;
+//	cout << ret[1] << "\n";
+//	cout << v[1] << "\n";//2 깊은복사로 원본값은 변하지않음을 확인. 
+//	return 0;
+//} 
+
+//memcpy()는 vector에서 깊은복사 안됨
+ 
+//#include<bits/stdc++.h>
+//using namespace std;
+//int main(void) {
+//	vector<int> v {1,2,3};
+//	vector<int> ret(3);
+//	memcpy( &ret, &v, 3*sizeof(int));
+//	
+//	cout << ret[1] << "\n";
+//	ret[1] = 100;
+//	cout << ret[1] << "\n";
+//	cout << v[1] << "\n";
+//	return 0;
+//	
+//}
+
+//=================================================================================================
+
+//copy()
+//copy(InputIterator first, InputIterator last, OutputIterator result)
+//복사하는 vector와 복사당하는 vector의 크기를 맞춰주는 것이 중요. v의 크기는 3이며, 
+//ret의 크기도 3으로 설정. 그리고 깊은 복사가 되어 ret을 수정하더라도 v에는 영향 없음. 
+
+
+//vector
+//#include<bits/stdc++.h>
+//using namespace std;
+//int main(void) {
+//	vector<int> v {1,2,3};
+//	vector<int> ret(3);
+//	copy(v.begin(), v.end(), ret.begin());
+//	cout << ret[1] << "\n";
+//	ret[1] = 100;
+//	cout << ret[1] << "\n";
+//	cout << v[1] << "\n";
+//	return 0;
+//}
+
+//Array
+//Array v의 크기가 5라면 copy(v, v + 5, ret) . +숫자는 해당 배열의 크기.
+
+//#include<bits/stdc++.h>
+//using namespace std;
+//int n=3;
+//int main(void) {
+//	int v[n] = {1,2,3};
+//	int ret[n];
+//	copy(v, v+n, ret);
+//	cout << ret[1] << "\n";
+//	ret[1] = 100;
+//	cout << ret[1] << "\n";
+//	cout << v[1] << "\n";
+//	return 0;
+//}
+
+
+//=================================================================================================
 
 
 
@@ -598,6 +791,30 @@ ld:long long
 
 
 
+
+
+
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 
 
 
