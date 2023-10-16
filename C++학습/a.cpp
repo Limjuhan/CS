@@ -1184,33 +1184,325 @@ ld:long long
 //따라서 데이터추가와 삭제를 많이 하는 것은 연결 리스트, 참조를 많이 하는 것은 배열로 하는 것이 좋습니다.
  
 
+//=================================================================================================
+//map
+//map은 고유한 키를 기반으로 키 - 값(key - value) 쌍으로 이루어져 있는 정렬된(삽입할때마다 자동 정렬된) 연관 컨테이너
+
+//#include<bits/stdc++.h>
+//using namespace std;
+//map<string, int> mp;
+//string a[] = {"주홍철","야영주", "박종선"};
+//
+//int main() {
+//	for(int i=0; i<3; i++) {
+//		mp.insert({a[i], i+1});
+//		mp[a[i]] = i+1;//mp["주홍철"] = 1 
+//	}
+//	for(auto it : mp) {
+//		cout << (it).first << " : " << (it).second << "\n";
+//	}
+//	cout << mp["kundol"] << '\n';
+//	mp["kundol"] = 4;
+//	cout << mp.size() << '\n';
+//	mp.erase("kundol");
+//	auto it = mp.find("kundol") ;//해당값의 위치를 반환. 못찾을시 map의end()이터레이터를 반환. 
+//	if(it==mp.end()) {
+//		cout << "못찾겠다.\n";
+//	}
+//	
+//	mp["kundol"]=100;
+//	
+//	it = mp.find("kundol");
+//	if(it !=mp.end()) {
+//		cout << (*it).first<< " : " << (*it).second << "\n";//it를 값참조후 key 출력 : 값참조후value출력 
+//	}
+//	cout << '\n';
+//	for(auto it : mp) {
+//		cout << (it).first << " : " << (it).second << "\n";//map 을참조.결과값이 인덱스내림차순인듯..  
+//	}
+//	
+//	for(auto it = mp.begin(); it != mp.end(); it++) {
+//		cout << (*it).first << " : " << (*it).second << '\n';
+//	}
+//	mp.clear();
+//	
+//	return 0;
+//} 
 
 
+//map에 해당 키에 해당하는 요소가 없다면 0 또는 빈문자열로 초기화
+
+//#include<bits/stdc++.h>
+//using namespace std;
+//map<int, int> mp;
+//map<string, string> mp2;
+//int main() {
+//	ios_base::sync_with_stdio(false);
+//	cin.tie(NULL); cout.tie(NULL);
+//	cout << mp[1] << '\n';//0
+//	cout << mp2["aaa"] << '\n';// 빈문자열 
+//	for(auto i : mp) cout << i.first << " " << i.second;
+//	cout << '\n';
+//	for(auto i : mp2) cout << i.first << " " << i.second;
+//	
+//	return 0;
+//}
+
+//0이 들어가있느지 확인후 값 할당 
+//#include<bits/stdc++.h> 
+//using namespace std;
+//map<int, int> mp;
+//map<string, string> mp2;
+//int main() {
+//	ios_base::sync_with_stdio(false);
+//	cin.tie(NULL); cout.tie(NULL);
+//	if(mp[1] == 0) { //mp[1]참조시 0을 할당하므로 true 
+//		mp[1] = 2;
+//	}
+//	for(auto i : mp) cout << i.first << " " << i.second;
+//	
+//	return 0;
+//}
+
+//0이 들어가는 것을 비교하기 귀찮다면.. 
+//#include <bits/stdc++.h>
+//using namespace std;
+//map<int,int> mp;
+//map<string, string> mp2;
+//int main() {
+//	ios_base::sync_with_stdio(false);
+//	cin.tie(NULL); cout.tie(NULL);
+//	if(mp.find(1) == mp.end()) {
+//		mp[1] = 2;
+//	}
+//	for(auto i : mp) cout << i.first << " " << i.second;
+//	
+//	return 0;
+//}
 
 
+//=================================================================================================
+
+//set : 고유한 요소만을 저장하는 컨테이너. 중복허용x 
+
+//#include<bits/stdc++.h> 
+//using namespace std;
+//int main() {
+//	set<pair<string, int>> st;
+//	st.insert({"test", 1});
+//	st.insert({"test", 1});
+//	st.insert({"test", 1});
+//	st.insert({"test", 1});
+//	cout << st.size() << '\n';
+//	
+//	set<int> st2;
+//	st2.insert(2);
+//	st2.insert(1);
+//	st2.insert(2);
+//	for (auto it : st2) {
+//		cout << it << '\n';
+//	}
+//	return 0;
+//}
+
+//unique()와 set 어떤걸 사용해서 중복을 제거할까? https://perfbench.com/
+//로직에 따라 다르겠지만 unique()가 더빠른듯...
+
+//#include<bits/stdc++.h> 
+//using namespace std;
+//void A() {
+//	vector<int> v;
+//	int n = 1e5;//1곱하기 10의5승 = 1000 
+//	for(int i=1; i<n; i++) {
+//		v.push_back(i);
+//		v.push_back(n-i);
+//	}
+//	sort(v.begin(), v.end());
+//	v.erase(unique(v.begin(), v.end()), v.end());
+//} 
+//
+//void B() {
+//	vector<int> v;
+//	int n = 1e5;
+//	for(int i=1; i<n; i++) {
+//		v.push_back(i);
+//		v.push_back(n-i);
+//	}
+//	set<int> st;
+//	for(int i: v) {
+//		st.insert(i);
+//	}
+//	vector<int> nv;
+//	for(int i : st) {
+//		nv.push_back(i);
+//	}
+//} 
+//
+//void test_latency(size_t iteration) {
+//	
+//	PROFILE_START("A");
+//	A();
+//	POFILE_STOP("A");
+//	PROFILE_START("B");
+//	B();
+//	PROFILE_STOP("B");
+//}
+//
+//int main() {
+//	//size_t : 4byte . 0 ~ 4,292,967,295
+//	const size_t warmups = 1000;
+//	const size_t tests = 100;
+//	
+//	PROFILE_RUN_ALL(warmups, tests, test_latency(__loop));
+//	
+//	return 0;
+//}
 
 
+//=================================================================================================
+
+//stack 스택은 가장 마지막으로 들어간 데이터가 가장 첫 번째로 나오는 성질
+//한, “교차하지 않고” 라는 문장이 나오면 스택을 사용해야 하는 것은 아닐까? 염두
+
+ 
+//#include<bits/stdc++.h> 
+//using namespace std;
+//stack<string> stk;
+//int main() {
+//	ios_base::sync_with_stdio(false);
+//	cin.tie(NULL);
+//	stk.push("엄");
+//	stk.push("준");
+//	stk.push("식");
+//	stk.push("화");
+//	stk.push("이");
+//	stk.push("팅");
+//	while(stk.size()) {
+//		cout << stk.top() << "\n";
+//		stk.pop();
+//	}
+//}
 
 
+//queue : 먼저넣은데이터가 먼저나옴.stack과 반대 
+
+//#include<bits/stdc++.h> 
+//using namespace std;
+//queue<int> q;
+//int main() {
+//	for(int i=1; i<=10; i++)q.push(i);
+//	while(q.size()) {
+//		cout << q.front() << ' ';
+//		q.pop();
+//	}
+//	return 0;
+//}
+
+//deque
+
+//#include<bits/stdc++.h>
+//using namespace std;
+//int main() {
+//	deque<int> dq;
+//	dq.push_front(1);
+//	dq.push_back(2);
+//	dq.push_back(3);
+//	cout << dq.front() << "\n";
+//	cout << dq.back() << "\n";
+//	cout << dq.size() << "\n";
+//	dq.pop_back();
+//	dq.pop_front();
+//	cout << dq.size() << "\n";
+//	return 0;
+//}
+
+//=================================================================================================
+
+//struct 커스텀한 자료구조 
+
+//#include<bits/stdc++.h> 
+//using namespace std;
+//struct Ralo {
+//	int a, b;
+//	double c,d,e;
+//};
+//void print(Ralo ralo) {
+//	cout << ralo.a << " " << ralo.b << " " << ralo.c << " " << ralo.d << " " << ralo.e << '\n';
+//}
+//
+//int main() {
+//	Ralo ralo = {1,1,1,1,1};
+//	print(ralo);
+//	vector<Ralo> ret;
+//	ret.push_back({1,2,3,4,5});
+//	ret.push_back({1,2,3,4,6});
+//	ret.push_back({});
+//	ret.push_back({1,3});
+//	for(Ralo ralo : ret) {
+//		print(ralo);
+//	}
+//	return 0;
+//}
+
+//point구조체
+//struct Point{
+//int y, x;
+//Point(int y, int x) : y(y), x(x){}
+//Point(){y = -1; x = -1; }
+//bool operator < (const Point & a) const{
+//if(x == a.x) return y < a.y;
+//return x < a.x;
+//}
+//}; 
 
 
+//string으로 이루어진 배열을 정렬
+//sort()를 통해 1차비교>compare()를 통해 2차비교
+ 
+//#include <bits/stdc++.h> 
+//using namespace std;
+//bool compare(string a, string b) {
+//	cout << "a : " << a << '\n';
+//	cout << "b : " << b << '\n';
+//	if(a.size() == b.size()) return a < b;
+//	
+//	return a.size() < b.size();
+//}
+//int main() {
+//	ios::sync_with_stdio(0);
+//	cin.tie(0);
+//	string a[3] = {"222","111","33"};
+//	sort(a, a+3, compare);
+//	cout << a[0] << " : " << a[0].size() << '\n';
+//	cout << a[1] << " : " << a[1].size() << '\n';
+//	cout << a[2] << " : " << a[2].size() << '\n';
+//	for(string b: a) cout << b << " ";
+//	return 0;
+//}
 
+//
+//#include <bits/stdc++.h>
+//using namespace std;
+//struct Ralo {
+//	int a, b;
+//};
+//
+//bool compare(Ralo A, Ralo B) {
+//	if(A.a == B.a) return A.b < B.b;
+//	return A.a <B.a;
+//}
+//int main() {
+//	ios::sync_with_stdio(0); cin.tie(0);
+//	Ralo a[3] = {{1,3}, {1,2}, {0,4}};
+//	for(Ralo A : a) cout << A.a << " : " << A.b << "\n";
+//	cout << "\n";
+//	sort(a, a+3, compare);
+//	for(Ralo A : a) cout << A.a << " : " << A.b << "\n";
+//	
+//	return 0;
+//}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//
 
 
 
