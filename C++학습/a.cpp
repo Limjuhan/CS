@@ -857,29 +857,377 @@ ld:long long
 
 //=================================================================================================
 
-//unique()
+//unique() : 범위안의 있는 요소중 앞에서부터 서로를 비교해가며 중복되는 요소를 제거.나머지 요소들은 삭제하지않고 그대로 두는 함수.
+//#include<bits/stdc++.h>
+//using namespace std;
+//vector<int> v;
+//int main() {
+//	for(int i=1; i<=5; i++) {
+//		v.push_back(i);
+//		v.push_back(i);
+//	}
+//	for(int i:v) cout << i << " ";
+//	cout << '\n';
+//	//중복되지 않은 욘소로 채운 후, 그 다음 이터레이터를 반환. 
+//	auto it = unique(v.begin(), v.end());
+//	cout << it - v.begin() << '\n';
+//	//앞에서부터 중복되지않게 채운후 나머지 요소들은 그대로 둔다.
+//	for(int i:v) cout << i << " " ;
+//	cout << '\n';
+//	return 0;
+//} 
+
+//unique()는 11,22,33...비교해서 쓰기때문에 sort()와 같이 써야된다. 
+//unique(index,index)를 실행하면 중복 제거한뒤 "다음 원소의 위치"를 반환. 그러므로 erase(unique(..),s.end())사용시 필요없는값만 삭제가능 
+
+//#include<bits/stdc++.h> 
+//using namespace std;
+//int main() {
+//	ios_base::sync_with_stdio(false);
+//	cin.tie(NULL);
+//	cout.tie(NULL);
+//	vector<int> s {4,3,3,5,1,2,3};
+//	
+//	s.erase(unique(s.begin(), s.end()), s.end());
+//	for(int i:s) cout << i << " ";
+//	cout << '\n';
+//	
+//	vector<int> s2 {4,3,3,5,1,2,3} ;
+//	sort(s2.begin(), s2.end());
+//	s2.erase(unique(s2.begin(), s2.end()), s2.end());
+//	for(int i:s2) cout << i << " ";
+//	return 0;
+//}
+ 
+ 
+//================================================================================================= 
+ 
+//lower_bound(), upper_bound()
+//정렬된 배열에서만 사용해야됨
+
+//lower_bound()는 이터레이터를 반환. 몇번째인지 알려면 - begin()을 해준다. 
+//#include<bits/stdc++.h> 
+//using namespace std;
+//typedef long long ll;
+//int main() {
+//	vector<int> a {1,2,3,3,3,4};
+//	cout << lower_bound(a.begin(), a.end(), 3) - a.begin() << "\n";//3이 시작되는 최소시작점 
+//	cout << upper_bound(a.begin(), a.end(), 3) - a.begin() << "\n";//3을 초과후 최초지점 
+//	return 0;
+//}
+  
+//주소값끼리 -하게되면 해당 주소값에서 몇번째에 이 요소가 들어있는지 반환. 
+//#include<bits/stdc++.h> 
+//using namespace std;
+//typedef long long ll;
+//int main() {
+//	vector<int> a {1,2,3,3,3,4};
+//	cout << &*lower_bound(a.begin(), a.end(), 3) << "\n";
+//	cout << &*a.begin() << "\n";
+//	cout << &*(a.begin() + 1) << "\n";
+//	cout << &*lower_bound(a.begin(), a.end(), 3) - &*a.begin() << "\n";
+//	
+//	return 0;
+//}
+ 
+//lower_bound가 가리키는 요소 출력. 
+//#include<bits/stdc++.h> 
+//using namespace std;
+//typedef long long ll;
+//vector<int>a {1,2,3,3,4,100};
+//int main() {
+//	cout << *lower_bound(a.begin(), a.end(), 100) << "\n"; //100(*의기능중 역참조). &는 주소반환 
+//	
+//	return 0;
+//}
+ 
+//숫자3이 몇개들어가있는지 확인가능
+//#include<bits/stdc++.h> 
+//using namespace std;
+//typedef long long ll;
+//vector<int> a {1,2,3,5,3,3,3,4, 100};
+//int main() {
+//	cout << upper_bound(a.begin(), a.end(), 3) - lower_bound(a.begin(), a.end(), 3) << "\n";
+//	
+//	sort(a.begin(), a.end());
+//	for(int i : a) cout <<i << " ";
+//	cout << "\n";
+//	cout << upper_bound(a.begin(), a.end(), 3) - lower_bound(a.begin(), a.end(), 3) << "\n";
+//	
+//	return 0;
+//}
+// 
+
+//찾는값이 없을경우  
+//#include<bits/stdc++.h> 
+//using namespace std;
+//vector<int> v;
+//int main() {
+//	for(int i=2; i<=5; i++) v.push_back(i);
+//	v.push_back(7);
+//	//2,3,4,5,7
+//	
+//	cout << upper_bound(v.begin(), v.end(), 6) - v.begin() << "\n";
+//	// 2 3 4 5 7
+//	// 0 1 2 3 4 에서 근방지점인 4번째 (7보다 6이 더 작으므로)
+//
+//	cout << lower_bound(v.begin(), v.end(), 6) - v.begin() << "\n";
+//	
+//	cout << upper_bound(v.begin(), v.end(), 9) - v.begin() << "\n";
+//	
+//	cout << lower_bound(v.begin(), v.end(), 9) - v.begin() << "\n";
+//	
+//	cout << upper_bound(v.begin(), v.end(), 0) - v.begin() << "\n";
+//	
+//	cout << lower_bound(v.begin(), v.end(), 0) - v.begin() << "\n";
+//}
+ 
+//=================================================================================================
+
+//accumulate() : 배열의합 구하기 
+
+//#include<bits/stdc++.h>
+//using namespace std;
+//
+//int main() {
+//	vector<int> v = {1,2,3,4,5,6,7,8,9,10};
+//	int sum = accumulate(v.begin(), v.end(), 0);
+//	cout << sum << '\n';
+//}
+
+
+//max_element() : 배열중 가장 큰 요소를 추출.이터레이터를 반환. *통해 값조회 가능. 
+
+//#include<bits/stdc++.h>
+//using namespace std;
+//
+//int main() {
+//	vector<int> v = {1,2,3,4,5,6,7,8,9,10};
+//	int a = *max_element(v.begin(), v.end());
+//	auto b = max_element(v.begin(), v.end());
+//	cout << a << '\n';
+//	cout << (int)(b - v.begin()) << '\n';
+//}
+
+
+//min_element() : 배열중 가장작은요소를 추출. 이터레이터를 반환. 
+
+//#include<bits/stdc++.h>
+//using namespace std;
+//
+//int main() {
+//	vector<int> v = {1,2,3,4,5,6,7,8,9,10};
+//	int a = *min_element(v.begin(), v.end());
+//	auto b = min_element(v.begin(), v.end());
+//	cout << a << '\n';
+//	cout << (int)(b-v.begin()) << '\n';
+//}
+
+//=================================================================================================
+
+//자료구조. : 데이터들과의 관계, 함수, 명령 등의 집합을 의미.데이터에 대해 효율적으로 접근,수정등 처리를 효율적으로 할수있게 만든 구조 
+//선형자료구조 : Array, Stack, Queue, Linked_list
+//비선형 : Graph, Tree 
+
+//vector<타입>변수명;
+//#include<bits/stdc++.h> 
+//using namespace std;
+//vector<int> v;
+//int main() {
+//	for(int i=1; i<=10; i++) v.push_back(i);
+//	for(int a:v) cout << a << " ";
+//	cout << "\n";
+//	v.pop_back();
+//	
+//	for(int a:v) cout << a << " ";
+//	cout << "\n";
+//	
+//	v.erase(v.begin(), v.begin()+3);
+//	
+//	for(int a: v) cout << a << " ";
+//	cout << "\n";
+//	
+//	auto a = find(v.begin(), v.end(), 100);
+//	if(a==v.end()) cout << "not found" << "\n";
+//	
+//	fill(v.begin(), v.end(), 10);
+//	for(int a:v) cout << a << " ";
+//	cout << "\n";
+//	v.clear();
+//	cout << "아무것도없을까?\n";
+//	for(int a:v) cout << a << " ";
+//	cout << "\n";
+//	return 0;
+//}
+
+//vector pair
+//#include<bits/stdc++.h>
+//using namespace std;
+//vector<int> v {1,2,3,};
+//int main () {
+//	for(int a:v) cout << a << " ";
+//	cout << "\n";
+//	for(int i=0; i<v.size(); i++) cout << v[i] << ' ';
+//	cout << "\n";
+//	vector<pair<int,int>> v2 = {{1,2}, {3,4}};
+//	for(pair<int,int> a : v2) cout << a.first <<  " ";
+//}
+
+
+//vector 정적할당.
+
+//#include<bits/stdc++.h> 
+//using namespace std;
+//vector<int> v(5,100);
+//int main() {
+//	for(int a : v) cout << a << " ";
+//	cout << "\n";
+//	return 0;
+//}
+
+
+//Array : 정적배열.
+
+//#include<bits/stdc++.h> 
+//using namespace std;
+//int a[3] = {1,2,3};
+//int a2[] = {1,2,3,4};
+//int a3[10];
+//int main() {
+//	for(int i=0; i<3; i++) cout << a[i] << " ";
+//	cout << "\n";
+//	for(int i:a) cout << i << " ";
+//	
+//	for(int i=0; i<4; i++) cout << a2[i] << " ";
+//	cout << "\n";
+//	for(int i:a2) cout << i << " ";
+//	
+//	for(int i=0; i<10; i++) a3[i]=i;
+//	cout <<"\n";
+//	for(int i:a3) cout << i << " ";
+//	return 0;
+//}
+
+//2차원배열, 탐색 팁
+//#include<bits/stdc++.h> 
+//using namespace std;
+//const int mxy = 3;
+//const int mxx = 4;
+//
+//int a[mxy][mxx];//a[3][4]
+//int main() {
+//	for(int i=0; i<mxy; i++) {
+//		for(int j=0; j<mxx; j++) {
+//			a[i][j]=(i+j);
+//		}
+//	}
+//	//good
+//	for(int i=0; i<mxy; i++) {
+//		for(int j=0; j<mxx; j++) {
+//			cout << a[i][j] << ' ';
+//		}
+//		cout << '\n';
+//	}
+//	cout << '\n';
+//	//bad
+//	for(int i=0; i<mxx; i++) {
+//		for(int j=0; j<mxy; j++) {
+//			cout << a[j][i] << ' ';h
+//		}
+//		cout << '\n';
+//	}
+//	return 0;
+//}
+
+//list 연결리스트.선형자료구조 
+//이중연결리스트
+//원형연결리스트 
+ 
+//#include<bits/stdc++.h> 
+//using namespace std;
+//list<int> a;
+//
+//void print(list <int> a) {
+//	for(auto it:a) cout << it << " ";
+//	cout << '\n';
+//}
+//
+//int main() {
+//	for(int i=1; i<=3; i++) a.push_back(i);
+//	for(int i=1; i<=3; i++) a.push_front(i);
+//	
+//	auto it = a.begin(); it++;
+//	a.insert(it, 1000);
+//	print(a);
+//	
+//	it = a.begin(); it++;
+//	a.erase(it);
+//	print(a);
+//	
+//	a.pop_front();
+//	a.pop_back();
+//	print(a); 
+//	
+//	cout << a.front() << " " << a.back() << '\n';
+//	a.clear();
+//	return 0;
+//}
+
+//랜덤접근 : vector, Array
+//순차적접근 : 연결리스트, 스택, 큐
+
+//array, LinkedList
+//배열은 연속된 메모리 공간에 데이터를 저장하고 연결리스트는 연속되지 않은 메모리 공간에 데이터를
+//저장합니다.
+//또한, 배열은 삽입과 삭제에는 O(n)이 걸리고 참조에는 O(1)이 걸립니다. 연결리스트는 삽입과 삭제에 O(1)이
+//걸리고 참조에는 O(n)이 걸립니다.
+//따라서 데이터추가와 삭제를 많이 하는 것은 연결 리스트, 참조를 많이 하는 것은 배열로 하는 것이 좋습니다.
+ 
 
 
 
 
 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
