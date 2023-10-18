@@ -1755,7 +1755,7 @@ ld:long long
 //순열과 조합
 //순열: 순서에 상관있이. 조합: 순서에 상관없이.
  
-//next_permutation사용전 오름차순으로 정렬해야함 
+//next_permutation사용전 오름차순으로 정렬해야함[first,last) 
 //#include <bits/stdc++.h>
 //using namespace std;
 //int main() {
@@ -1783,6 +1783,81 @@ ld:long long
 //		cout << '\n';
 //	}while (next_permutation(a.begin(), a.end()));
 //}
+
+//재귀를 이용한 순열
+
+
+
+//조합 : 순서상관없이 
+
+//재귀를 이용한 조합 
+//#include<bits/stdc++.h> 
+//using namespace std;
+//
+//int n=5, k=3, a[5] = {1,2,3,4,5};
+//
+//void print(vector<int> b) {
+//	for(int i : b)cout << i << " ";
+//	cout << '\n';
+//}
+//
+//void combi(int start, vector<int> b) {
+//	if(b.size() == k) {
+//		print(b);
+//		return;
+//	}	
+//	for(int i=start+1; i<n; i++) {
+//		b.push_back(i);
+//		combi(i,b); 
+//		b.pop_back();
+//	}
+//	return;
+//}
+//
+//int main() { 
+//	vector<int> b;
+//	combi(-1, b); 
+//	return 0;
+//}
+
+//#include<bits/stdc++.h>
+//using namespace std;
+//int n=5, k=3, a[5] = {1,2,3,4,5};
+//void print(vector<int> b) {
+//	for(int i : b)cout << i << " ";
+//	cout << '\n';
+//}
+//void combi(int start, vector<int> b) {
+//	if (b.size() == k) {
+//		print(b);
+//		return;
+//	}
+//	for(int i= start+1; i<n; i++) {
+//		b.push_back(i);
+//		combi(i,b);
+//		b.pop_back();
+//	}
+//	return;
+//}
+//
+//int main() {
+//	vector<int> b;
+//	combi(-1,b);
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
