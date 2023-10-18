@@ -1502,7 +1502,287 @@ ld:long long
 //	return 0;
 //}
 
+
+//3개의 멤버변수 정렬
+//1순위 x오름차순.2순위 y내림차순.3순위 z오름차순
+ 
+//struct Poing {
+//	int y, x, z;
+//	Point() {y = -1; x = -1; z = -1;
+//	}
+//	bool operator < (const Point & a) const {
+//		if(x==a.x) {
+//			if (y ==a.y) return z < a.z;
+//			return y > a.y;
+//		}
+//		return x <a.x;
+//	}
+//}; 
+
+//vector에다 struct넣고 정렬
+
+//#include <bits/stdc++.h> 
+//using namespace std;
+//struct Point {
+//	int y, x;
+//};
+//bool cmp(const Point & a ,const Point & b) {
+//	return a.x > b.x;
+//}
+//vector<Point> v;
+//int main () {
+//	for(int i=10; i>=1; i--) {
+//		v.push_back({i, 10-i});
+//	}
+//	sort(v.begin(), v.end(), cmp);
+//	for(auto it:v) cout << it.y << " : " << it.x << "\n";
+//		return 0;
+//}
+
+//=================================================================================================
+
+//priority queue 우선순위 큐
+//각 요소에 어떠한 우선순위가 추가로 부여되어있는 컨테이너 
+ 
+//int형 우선순위큐. 기본값은 내림차순 priority_queue<타입> 
+//greater<타입>:오름차순, less<타입>:내림차순. 
+
+//#include <bits/stdc++.h>
+//using namespace std;
+//priority_queue<int, vector<int>, greater<int> > pq;//오름차순
+//priority_queue<int> pq2; //내림차순
+//priority_queue<int, vector<int>, less<int> > pq3;//내림차순
 //
+//int main() {
+//	for(int i=5; i>=1; i--) {
+//		pq.push(i); pq2.push(i); pq3.push(i);
+//	}
+//	while(pq.size()) {
+//		cout << pq.top() << " : " << pq2.top() << " : " << pq3.top() << '\n';
+//		pq.pop(); pq2.pop(); pq3.pop();
+//	}
+//	return 0;
+//} 
+
+//구조체를 담은 우선순위 큐
+//#include <bits/stdc++.h> 
+//using namespace std;
+//struct Point {
+//	int y, x;
+//	Point(int y, int x) : y(y), x(x) {}
+//	Point() {y=-1; x=-1;}
+//	bool operator < (const Point & a) const {
+//	return x > a.x;
+//	}
+//};
+//
+//priority_queue<Point> pq;
+//int main() {
+//	pq.push({1, 1});
+//	pq.push({2, 2});
+//	pq.push({3, 3});
+//	pq.push({4, 4});
+//	pq.push({5, 5});
+//	pq.push({6, 6});
+//	cout << pq.top().x << "\n";
+//	return 0;
+//}
+/*
+1
+*///내림차순정렬후 맨위를 확인시 6이여야하나 1이 나옴 
+//우선순위큐에 커스텀 정렬을 넣을 때 반대로 넣어야함. 
+
+//strcut변경
+
+//#include <bits/stdc++.h>
+//using namespace std;
+//struct Point {
+//	int y,x;
+//	Point(int y, int x) : y(y), x(x) {}
+//	Point() {y=-1; x=-1;}
+//	bool operator < (const Point & a) const {
+//	return x < a.x;
+//	}
+//};
+//
+//priority_queue<Point> pq;
+//int main() {
+//	pq.push({1, 1});
+//	pq.push({2, 2});
+//	pq.push({3, 3});
+//	pq.push({4, 4});
+//	pq.push({5, 5});
+//	pq.push({6, 6});
+//	cout << pq.top().x << "\n";
+//	return 0;
+//}
+
+//=================================================================================================
+
+//값에의한호출: 변수의 값을복사해서  전달. 수정시 원본과 상관없음 
+//참조에의한호출:변수의주소를 전달하기때문에 수정시 원본도 변경 
+
+//참조에의한 호출 
+//#include <bits/stdc++.h>
+//using namespace std;
+//int add(int &a, int b) {
+//	a +=10;
+//	cout << a << '\n';
+//	return a+b;
+//}
+//
+//int main() {
+//	int a = 1;
+//	int b = 2;
+//	int sum = add(a,b);
+//	cout << a << '\n';
+//	return 0;
+//}
+
+//=================================================================================================
+
+//배열 수정하기
+//Array의 요소 수정하기.
+//Array의 요소를 수정할 때는 다음처럼 크기를 정하지 않은 int a[], 또는 배열의 크기인 int
+//a[3], 배열의 포인터인 int * a를 넘겨서 수정할 수 있습니다.
+
+
+//#include <bits/stdc++.h> 
+//using namespace std;
+//int a[3] = {1,2,3};
+//void go(int a[]) {
+//	a[2] = 100;
+//}
+//void go2(int a[3]) {
+//	a[2] = 1000;
+//}
+//void go3(int *a) {
+//	a[0] = 10000;
+//}
+//
+//int main() {
+//	go(a);  cout << a[2] << '\n';
+//	go2(a);  cout << a[2] << '\n';
+//	go3(a);  cout << a[0] << '\n';
+//}
+
+//2차원배열 수정하기
+
+//vector
+
+//#include<bits/stdc++.h> 
+//using namespace std;
+//vector<vector<int>> v;
+//vector<vector<int>> v2(10, vector<int>(10,0));
+//vector<int> v3[10];
+//
+//void go(vector<vector<int>> &v) {
+//	v[0][0] = 100;
+//}
+//void go2(vector<vector<int>> &v) {
+//	v[0][0] = 100;
+//}
+//void go3(vector<int> v[10]) {
+//	v[0][0] = 100;
+//}
+//
+//int main() {
+//	vector<int> temp;
+//	temp.push_back(0);
+//	v.push_back(temp);
+//	
+//	v3[0].push_back(0);
+//	
+//	go(v); go2(v2); go3(v3);
+//	cout << v[0][0] << " : " << v2[0][0] << " : " << v3[0][0] << '\n';
+//	return 0;
+//	
+//}
+
+//array
+//#include<bits/stdc++.h>
+//using namespace std;
+//
+//int a[3][3] = {{1,2,3}, {1,2,3}, {1,2,3}};
+//
+//void go(int a[][3]) {
+//	a[2][2] = 100;
+//}
+//
+//void go2(int a[3][3]) {
+//	a[2][2] = 1000;
+//}
+//
+//int main() {
+//	go(a); cout << a[2][2] << '\n';
+//	go2(a); cout << a[2][2] << '\n';
+//}
+
+//=================================================================================================
+
+//재귀함수.
+//정의단계에서 자신을 재참조하는 함수
+//전달되는 상태인 매개변수가 달라질분 똑같은 일을 하는 함수
+//큰 문제를 작은 부분문제로 나눠서 풀때 사용. 
+// 기저 사례란 더 이상 쪼개지지 않는 가장 작은 작업으로, 이에 도달했을 때는 재귀호출을 멈추고 답을 곧장 반환해야한다. 
+//기저 사례를 정할 때는 모든 사례의 답이 기저 사례를 이용하여 계산될 수 있도록 해야한다.
+
+//#include <bits/stdc++.h> 
+//using namespace std;
+//int fact_rec(int n) {
+//	if(n==1 || n==0) return 1;
+//	return n * fact_rec(n-1);
+//}
+//
+//int fact_for(int n) {
+//	int ret = 1;
+//	
+//	for(int i=1; i<=n; i++) {
+//		ret *= i;
+//	}
+//	return ret;
+//}
+//int n = 5;
+//
+//int main() {
+//	cout << fact_f or(n) << '\n';
+//	cout << fact_rec(n) << '\n';
+//	return 0;
+//}
+
+//=================================================================================================
+
+//순열과 조합
+//순열: 순서에 상관있이. 조합: 순서에 상관없이.
+ 
+//next_permutation사용전 오름차순으로 정렬해야함 
+//#include <bits/stdc++.h>
+//using namespace std;
+//int main() {
+//	int a[] = {1,2,3};
+//	vector<int> b = {7,5,6,2};
+//	sort(b.begin(), b.end()); 
+//	do{
+//		for(int i:a) cout << i << " ";
+//		cout << '\n';
+//	}
+//	//while (next_permutation(&a[0], &a[0] + 3));//array
+//	while (next_permutation(b.begin(), b.end()));//vector
+//}
+
+
+//#include <bits/stdc++.h>
+//using namespace std;
+//int main() {
+//	vector<int> a = {2,1,3,100,200};
+//	sort(a.begin(), a.end());
+//	do {
+//		for(int i=0; i<2; i++) {
+//			cout << a[i] << " ";
+//		}
+//		cout << '\n';
+//	}while (next_permutation(a.begin(), a.end()));
+//}
 
 
 
@@ -1511,6 +1791,20 @@ ld:long long
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
 
 
 
